@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+    <span>Analisis de Laboratorios:</span>
+</mat-toolbar>
+
+<mat-card>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef> Apellido </th>
+          <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="laboratorio">
+          <th mat-header-cell *matHeaderCellDef> Laboratorio </th>
+          <td mat-cell *matCellDef="let element"> {{element.Laboratorio}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="resultados">
+          <th mat-header-cell *matHeaderCellDef> Resultados </th>
+          <td mat-cell *matCellDef="let element"> {{element.resultados}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef> Fecha Consulta </th>
+          <td mat-cell *matCellDef="let element"> {{element.fecha |date:'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+            
+</mat-card>
