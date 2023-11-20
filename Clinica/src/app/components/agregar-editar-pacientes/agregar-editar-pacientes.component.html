@@ -1,1 +1,95 @@
-<p>agregar-editar-pacientes works!</p>
+<h2 mat-dialog-title>Agregar Persona</h2>
+<form [formGroup]="form" (ngSubmit)="addEditPaciente()">
+    <mat-dialog-content >
+        <div class="row">
+            <div class="column">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input formControlName="Nombre_Pac" matInput placeholder="Ingrese el Nombre" autocomplete="off">    
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Nombre_Pac')?.hasError('required') && form.get('Nombre_Pac')?.touched">
+                        El nombre es un campo <strong>requerido</strong>
+                    </span>
+                    <span *ngIf="form.get('Nombre_Pac')?.hasError('maxlength')">
+                        El nombre debe tener como maximo <strong>20 caracteres</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="column">
+                <mat-form-field appearance="fill">
+                    <mat-label>Apellido</mat-label>
+                    <input formControlName="Apellido_Pac" matInput placeholder="Ingrese el Apellido" autocomplete="off">    
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Apellido_Pac')?.hasError('required') && form.get('Apellido_Pac')?.touched">
+                        El apellido es un campo <strong>requerido</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <mat-form-field appearance="fill">
+                    <mat-label>Direccion</mat-label>
+                    <input formControlName="Direccion" matInput placeholder="Ingrese la Direccion" autocomplete="off">    
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Direccion')?.hasError('required') && form.get('Direccion')?.touched">
+                        La direccion es un campo <strong>requerido</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <mat-form-field>
+                    <mat-label>Genero</mat-label>
+                    <mat-select formControlName="Genero">
+                        <mat-option *ngFor="let item of Genero" [value]="item">
+                            {{item}}
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="error">
+                    <span *ngIf="form.get('Genero')?.hasError('required') && form.get('Genero')?.touched">
+                        El genero es un campo <strong>requerido</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="column">
+                <mat-form-field appearance="fill">
+                    <mat-label>Telefono</mat-label>
+                    <input formControlName="Telefono" matInput placeholder="Ingrese el Telefono" autocomplete="off">    
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Telefono')?.hasError('required') && form.get('Telefono')?.touched">
+                        El telefono es un campo <strong>requerido</strong>
+                    </span>
+                    <span *ngIf="form.get('Telefono')?.hasError('pattern')">
+                        El campo solo acepta <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Fecha Nacimiento</mat-label>
+                    <input [max]="maxDate" formControlName="Fecha_Nac" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                  </mat-form-field> 
+                  <div class="error">
+                    <span *ngIf="form.get('Fecha_Nac')?.hasError('required') && form.get('Fecha_Nac')?.touched">
+                        La fecha de nacimiento es un campo <strong>requerido</strong>
+                    </span>
+                </div>                 
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+    <button type="button" (click)="cancelar()" mat-button >Cancelar</button>
+    <button  type="submit" mat-button cdkFocusInitial>Aceptar</button>
+    </mat-dialog-actions>
+</form>

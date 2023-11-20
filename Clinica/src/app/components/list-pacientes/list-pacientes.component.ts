@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import { Paciente } from 'src/app/interfaces/Paciente';
+import { MatDialog } from '@angular/material/dialog';
+import { AgregarEditarPacientesComponent } from '../agregar-editar-pacientes/agregar-editar-pacientes.component';
 
 
 const listPaciente : Paciente[] = [
@@ -27,7 +29,7 @@ export class ListPacientesComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(){
+  constructor(public dialog: MatDialog){
     this.dataSource = new MatTableDataSource(listPaciente);
   }
 
@@ -45,5 +47,15 @@ export class ListPacientesComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  addEditPaciente(){
+    const dialogRef = this.dialog.open(AgregarEditarPacientesComponent, {
+     width: '550px',
+     disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Cancelado xd');
+    });
   }
 }
