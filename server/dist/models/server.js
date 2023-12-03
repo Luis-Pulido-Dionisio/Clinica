@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const paciente_routes_1 = __importDefault(require("../routes/paciente.routes"));
 const connection_1 = __importDefault(require("../db/connection"));
+const cors_1 = __importDefault(require("cors"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -21,6 +22,8 @@ class Server {
     }
     middlewares() {
         this.app.use(express_1.default.json());
+        //Cors
+        this.app.use((0, cors_1.default)());
     }
     routes() {
         this.app.use('/api/pacientes', paciente_routes_1.default);

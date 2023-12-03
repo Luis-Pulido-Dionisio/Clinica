@@ -9,13 +9,15 @@ import { AgregarEditarPacientesComponent } from './components/agregar-editar-pac
 
 /*Modulos*/
 import { SharedModule } from './shared/shared.module';
+import { NavComponent } from './components/nav/nav.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ListPacientesComponent,
-    AgregarEditarPacientesComponent
+    AgregarEditarPacientesComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

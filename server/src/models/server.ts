@@ -1,6 +1,7 @@
 import express, {  Application } from 'express';
 import routesPacientes from '../routes/paciente.routes';
 import connection from '../db/connection';
+import cors from 'cors';
 
 class Server {
     private app: Application;
@@ -23,6 +24,8 @@ class Server {
 
     middlewares(){
         this.app.use(express.json());
+        //Cors
+        this.app.use(cors());
     }
 
     routes(){

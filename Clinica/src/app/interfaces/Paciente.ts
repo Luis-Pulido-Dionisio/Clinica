@@ -1,7 +1,7 @@
 export interface Paciente{
     idPaciente?: number;
     Nombre_Pac: string;
-    Apellido_Pac: string;
+    Apellidos_Pac: string;
     Direccion: string;
     Genero:string;
     Telefono:string;

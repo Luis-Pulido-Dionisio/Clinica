@@ -1,4 +1,8 @@
-<h2 mat-dialog-title>Agregar Persona</h2>
+<div class="container">
+    <h2 mat-dialog-title>Agregar Persona</h2>
+<mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+</div>
+
 <form [formGroup]="form" (ngSubmit)="addEditPaciente()">
     <mat-dialog-content >
         <div class="row">
@@ -19,10 +23,10 @@
             <div class="column">
                 <mat-form-field appearance="fill">
                     <mat-label>Apellido</mat-label>
-                    <input formControlName="Apellido_Pac" matInput placeholder="Ingrese el Apellido" autocomplete="off">    
+                    <input formControlName="Apellidos_Pac" matInput placeholder="Ingrese el Apellido" autocomplete="off">    
                 </mat-form-field>
                 <div class="error">
-                    <span *ngIf="form.get('Apellido_Pac')?.hasError('required') && form.get('Apellido_Pac')?.touched">
+                    <span *ngIf="form.get('Apellidos_Pac')?.hasError('required') && form.get('Apellidos_Pac')?.touched">
                         El apellido es un campo <strong>requerido</strong>
                     </span>
                 </div>
@@ -65,9 +69,6 @@
                 <div class="error">
                     <span *ngIf="form.get('Telefono')?.hasError('required') && form.get('Telefono')?.touched">
                         El telefono es un campo <strong>requerido</strong>
-                    </span>
-                    <span *ngIf="form.get('Telefono')?.hasError('pattern')">
-                        El campo solo acepta <strong>numeros</strong>
                     </span>
                 </div>
             </div>
