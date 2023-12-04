@@ -1,0 +1,85 @@
+<div class="container">
+    <h2 mat-dialog-title>{{ operacion }} Analisis</h2>
+<mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="addEditAnalisis()">
+    <mat-dialog-content >
+        <div class="row">
+            <div class="column">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre Paciente</mat-label>
+                    <input formControlName="Nombre_Pac" matInput placeholder="Ingrese el Nombre del Paciente" autocomplete="off">    
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Nombre_Pac')?.hasError('required') && form.get('Nombre_Pac')?.touched">
+                        El nombre es un campo <strong>requerido</strong>
+                    </span>
+                    <span *ngIf="form.get('Nombre_Pac')?.hasError('maxlength')">
+                        El nombre debe tener como maximo <strong>20 caracteres</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="column">
+                <mat-form-field appearance="fill">
+                    <mat-label>Laboratorio</mat-label>
+                    <input formControlName="Nombre_Lab" matInput placeholder="Ingrese el Laboratorio" autocomplete="off">    
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Nombre_Lab')?.hasError('required') && form.get('Nombre_Lab')?.touched">
+                        El laboratorio es un campo <strong>requerido</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <mat-form-field appearance="fill">
+                    <mat-label>Descripcion</mat-label>
+                    <input formControlName="Descripcion" matInput placeholder="Ingrese la Descripcion" autocomplete="off">    
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Descripcion')?.hasError('required') && form.get('Descripcion')?.touched">
+                        La descripcion es un campo <strong>requerido</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <mat-form-field>
+                    <mat-label>Tipo</mat-label>
+                    <mat-select formControlName="Tipo">
+                        <mat-option *ngFor="let item of Tipo" [value]="item">
+                            {{item}}
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="error">
+                    <span *ngIf="form.get('Tipo')?.hasError('required') && form.get('Tipo')?.touched">
+                        El tipo es un campo <strong>requerido</strong>
+                    </span>
+                </div>
+            </div>
+        <div class="row">
+            <div class="column">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Fecha</mat-label>
+                    <input [max]="maxDate" formControlName="Fecha" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                  </mat-form-field> 
+                  <div class="error">
+                    <span *ngIf="form.get('Fecha')?.hasError('required') && form.get('Fecha')?.touched">
+                        La fecha es un campo <strong>requerido</strong>
+                    </span>
+                </div>                 
+            </div>
+        </div>
+    </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+    <button type="button" (click)="cancelar()" mat-button >Cancelar</button>
+    <button  type="submit" mat-button cdkFocusInitial>Aceptar</button>
+    </mat-dialog-actions>
+</form>

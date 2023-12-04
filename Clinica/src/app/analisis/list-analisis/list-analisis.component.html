@@ -1,0 +1,58 @@
+<mat-toolbar color="primary">
+    <span>Analisis :</span>
+</mat-toolbar>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<mat-card>
+  <div class="container-fluid">
+       <mat-form-field >
+        <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="applyFilter($event)"  #input autocomplete="off">
+          
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addEditAnalisis()" >Agregar</button>
+    </div>
+        
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z15" matSort>
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="Nombre_Pac">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Paciente</th>
+          <td mat-cell *matCellDef="let element"> {{element.Nombre_Pac}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="Nombre_Lab">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Laboratorio </th>
+          <td mat-cell *matCellDef="let element"> {{element.Nombre_Lab}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+          <td mat-cell *matCellDef="let element"> {{element.Descripcion}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Tipo_Analisis">
+          <th mat-header-cell *matHeaderCellDef> Tipo Analisis </th>
+          <td mat-cell *matCellDef="let element"> {{element.Tipo_Analisis} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Telefono">
+          <th mat-header-cell *matHeaderCellDef> Telefono </th>
+          <td mat-cell *matCellDef="let element"> {{element.Telefono}} </td>
+        </ng-container>
+        
+
+        <ng-container matColumnDef="Acciones">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let element"> 
+              <mat-icon (click)="addEditAnalisis(element.idAnalisis)" class="btnEdit" matTooltip="Editar">edit</mat-icon>
+              <mat-icon (click)="deleteAnalisis(element.idAnalisis)" class="btnDelete" matTooltip="Eliminar">delete</mat-icon>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+        
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</mat-card>

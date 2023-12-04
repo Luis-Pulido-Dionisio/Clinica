@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const laboratorios_controllers_1 = require("../controllers/laboratorios.controllers");
+const router = (0, express_1.Router)();
+router.get('/', laboratorios_controllers_1.getLaboratorios);
+router.get('/:idLaboratorios', laboratorios_controllers_1.getLaboratorio);
+router.delete('/:idLaboratorios', laboratorios_controllers_1.deleteLaboratorio);
+router.post('/', laboratorios_controllers_1.postLaboratorio);
+router.put('/:idLaboratorios', laboratorios_controllers_1.putLaboratorio);
+exports.default = router;

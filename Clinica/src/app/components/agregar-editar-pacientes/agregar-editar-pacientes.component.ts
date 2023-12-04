@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Paciente } from 'src/app/interfaces/Paciente';
 import { PacientesService } from '../../services/pacientes.service';
@@ -10,16 +10,19 @@ import { PacientesService } from '../../services/pacientes.service';
   templateUrl: './agregar-editar-pacientes.component.html',
   styleUrls: ['./agregar-editar-pacientes.component.css']
 })
-export class AgregarEditarPacientesComponent {
+export class AgregarEditarPacientesComponent implements OnInit{
 
   Genero: string[] = ['Masculino', 'Femenino'];
   form:FormGroup;
 
   maxDate:Date;
   loading: boolean = false;
+  operacion: string = 'Agregar ';
+
+  idPacientes: number | undefined;
 
   constructor(public dialogRef: MatDialogRef<AgregarEditarPacientesComponent>,
-    private fb:FormBuilder, private _pacienteService:PacientesService,  private _snackBar: MatSnackBar){
+    private fb:FormBuilder, private _pacienteService:PacientesService,  private _snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: any){
       this.maxDate = new Date();
       this.form = this.fb.group({
         Nombre_Pac: ['',[Validators.required, Validators.maxLength(20)]],
@@ -28,6 +31,33 @@ export class AgregarEditarPacientesComponent {
         Genero: ['',Validators.required],
         Fecha_Nac: [null,Validators.required],
         Telefono: [null,Validators.required]
+      })
+      console.log('Estoy en el modal', data)
+      this.idPacientes = data.idPacientes
+    }
+
+    ngOnInit(): void {
+      this.esEditar(this.idPacientes)
+    }
+
+    esEditar(idPacientes:number | undefined){
+      if(idPacientes !== undefined){
+        this.operacion = 'Editar ';
+        this.getPaciente(idPacientes);
+      }
+    }
+
+    getPaciente(idPacientes:number){
+      this._pacienteService.getPaciente(idPacientes).subscribe(data => {
+        this.form.setValue({
+          Nombre_Pac: data.Nombre_Pac,
+          Apellidos_Pac: data.Apellidos_Pac,
+          Direccion: data.Direccion,
+          Genero: data.Genero,
+          Fecha_Nac: new Date(data.Fecha_Nac),
+          Telefono: data.Telefono
+        })
+        
       })
     }
 
@@ -49,20 +79,29 @@ export class AgregarEditarPacientesComponent {
       Fecha_Nac: this.form.value.Fecha_Nac.toISOString().slice(0,10)
     }
 
-    console.log(Paciente.Fecha_Nac)
 
     this.loading = true;
 
-   this._pacienteService.addPaciente(Paciente).subscribe(() => {
+    if(this.idPacientes == undefined) {
+      this._pacienteService.addPaciente(Paciente).subscribe(() => {
+        this.mensajeExito('agregada');
+       // console.log('Persona agregada con exito')
+       })
+    }else{
+      //Editar
+      this._pacienteService.updatePaciente(this.idPacientes, Paciente).subscribe(data => { 
+        this.mensajeExito('actualizada');
+        //this.obtenerPacientes();
+        
+      })
+    }
     this.loading = false;
-    this.mensajeExito();
     this.dialogRef.close(true);
-   // console.log('Persona agregada con exito')
-   })
 
+   
   }
-  mensajeExito(){
-    this._snackBar.open('La persona fue agregada con exito', ',', {
+  mensajeExito(operacion: string){
+    this._snackBar.open(`La persona fue ${operacion} con exito`, ',', {
       duration: 2000
     });
   }

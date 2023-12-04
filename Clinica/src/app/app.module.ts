@@ -10,6 +10,15 @@ import { AgregarEditarPacientesComponent } from './components/agregar-editar-pac
 /*Modulos*/
 import { SharedModule } from './shared/shared.module';
 import { NavComponent } from './components/nav/nav.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { ListDoctoresComponent } from './doctor/list-doctores/list-doctores.component';
+import { AgregarEditarDoctoresComponent } from './doctor/agregar-editar-doctores/agregar-editar-doctores.component';
+import { ListConsultasComponent } from './consultas/list-consultas/list-consultas.component';
+import { AgregarEditarConsultasComponent } from './consultas/agregar-editar-consultas/agregar-editar-consultas.component';
+import { ListAnalisisComponent } from './analisis/list-analisis/list-analisis.component';
+import { AgregarEditarAnalisisComponent } from './analisis/agregar-editar-analisis/agregar-editar-analisis.component';
+import { ListLaboratoriosComponent } from './laboratorio/list-laboratorios/list-laboratorios.component';
+import { AgregarEditarLaboratoriosComponent } from './laboratorio/agregar-editar-laboratorios/agregar-editar-laboratorios.component';
 
 
 @NgModule({
@@ -17,7 +26,15 @@ import { NavComponent } from './components/nav/nav.component';
     AppComponent,
     ListPacientesComponent,
     AgregarEditarPacientesComponent,
-    NavComponent
+    NavComponent,
+    ListDoctoresComponent,
+    AgregarEditarDoctoresComponent,
+    ListConsultasComponent,
+    AgregarEditarConsultasComponent,
+    ListAnalisisComponent,
+    AgregarEditarAnalisisComponent,
+    ListLaboratoriosComponent,
+    AgregarEditarLaboratoriosComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +42,11 @@ import { NavComponent } from './components/nav/nav.component';
     BrowserAnimationsModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_DATE_LOCALE, useValue: 'es'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

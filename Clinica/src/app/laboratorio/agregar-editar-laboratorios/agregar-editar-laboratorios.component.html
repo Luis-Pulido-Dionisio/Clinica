@@ -1,33 +1,33 @@
 <div class="container">
-    <h2 mat-dialog-title>{{ operacion }} Persona</h2>
+    <h2 mat-dialog-title>{{ operacion }} Laboratorio</h2>
 <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
 </div>
 
-<form [formGroup]="form" (ngSubmit)="addEditPaciente()">
+<form [formGroup]="form" (ngSubmit)="addEditLaboratorio()">
     <mat-dialog-content >
         <div class="row">
             <div class="column">
                 <mat-form-field appearance="fill">
                     <mat-label>Nombre</mat-label>
-                    <input formControlName="Nombre_Pac" matInput placeholder="Ingrese el Nombre" autocomplete="off">    
+                    <input formControlName="Nombre_Lab" matInput placeholder="Ingrese el Nombre" autocomplete="off">    
                 </mat-form-field>
                 <div class="error">
-                    <span *ngIf="form.get('Nombre_Pac')?.hasError('required') && form.get('Nombre_Pac')?.touched">
+                    <span *ngIf="form.get('Nombre_Lab')?.hasError('required') && form.get('Nombre_Lab')?.touched">
                         El nombre es un campo <strong>requerido</strong>
                     </span>
-                    <span *ngIf="form.get('Nombre_Pac')?.hasError('maxlength')">
+                    <span *ngIf="form.get('Nombre_Lab')?.hasError('maxlength')">
                         El nombre debe tener como maximo <strong>20 caracteres</strong>
                     </span>
                 </div>
             </div>
             <div class="column">
                 <mat-form-field appearance="fill">
-                    <mat-label>Apellido</mat-label>
-                    <input formControlName="Apellidos_Pac" matInput placeholder="Ingrese el Apellido" autocomplete="off">    
+                    <mat-label>Horario</mat-label>
+                    <input formControlName="Horario" matInput placeholder="Ingrese el Horario" autocomplete="off">    
                 </mat-form-field>
                 <div class="error">
-                    <span *ngIf="form.get('Apellidos_Pac')?.hasError('required') && form.get('Apellidos_Pac')?.touched">
-                        El apellido es un campo <strong>requerido</strong>
+                    <span *ngIf="form.get('Horario')?.hasError('required') && form.get('Horario')?.touched">
+                        El horario es un campo <strong>requerido</strong>
                     </span>
                 </div>
             </div>
@@ -47,17 +47,13 @@
         </div>
         <div class="row">
             <div class="column">
-                <mat-form-field>
-                    <mat-label>Genero</mat-label>
-                    <mat-select formControlName="Genero">
-                        <mat-option *ngFor="let item of Genero" [value]="item">
-                            {{item}}
-                        </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <div class="error">
-                    <span *ngIf="form.get('Genero')?.hasError('required') && form.get('Genero')?.touched">
-                        El genero es un campo <strong>requerido</strong>
+                <mat-form-field appearance="fill">
+                    <mat-label>Telefono</mat-label>
+                    <input formControlName="Correo" matInput placeholder="Ingrese el Correo" autocomplete="off">    
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Correo')?.hasError('required') && form.get('Correo')?.touched">
+                        El Correo es un campo <strong>requerido</strong>
                     </span>
                 </div>
             </div>
@@ -71,21 +67,6 @@
                         El telefono es un campo <strong>requerido</strong>
                     </span>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Fecha Nacimiento</mat-label>
-                    <input [max]="maxDate" formControlName="Fecha_Nac" matInput [matDatepicker]="picker">
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker touchUi #picker></mat-datepicker>
-                  </mat-form-field> 
-                  <div class="error">
-                    <span *ngIf="form.get('Fecha_Nac')?.hasError('required') && form.get('Fecha_Nac')?.touched">
-                        La fecha de nacimiento es un campo <strong>requerido</strong>
-                    </span>
-                </div>                 
             </div>
         </div>
     </mat-dialog-content>

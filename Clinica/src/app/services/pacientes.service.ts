@@ -25,4 +25,10 @@ export class PacientesService {
    addPaciente(Paciente:Paciente):Observable<void> {
     return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}`, Paciente)
   }
+  getPaciente(idPacientes: number):Observable<Paciente>{
+    return this.http.get<Paciente>(`${this.myAppUrl}${this.myApiUrl}${idPacientes}`)
+  }
+  updatePaciente(idPacientes:number, Paciente: Paciente):Observable<void>{
+    return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}${idPacientes}`, Paciente)
+  }
 }

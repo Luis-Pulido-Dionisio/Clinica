@@ -61,10 +61,11 @@ export class ListPacientesComponent implements AfterViewInit, OnInit {
     }
   }
 
-  addEditPaciente(){
+  addEditPaciente(idPacientes?:number){
     const dialogRef = this.dialog.open(AgregarEditarPacientesComponent, {
      width: '550px',
-     disableClose: true
+     disableClose: true,
+     data: {idPacientes : idPacientes}
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('Cancelado xd');
@@ -73,6 +74,7 @@ export class ListPacientesComponent implements AfterViewInit, OnInit {
       }
       
     });
+    
   }
 
   deletePaciente(idPacientes: number){

@@ -1,5 +1,9 @@
 import express, {  Application } from 'express';
 import routesPacientes from '../routes/paciente.routes';
+import routesDoctores from '../routes/doctores.routes';
+import routesConsultas from '../routes/consultas.routes';
+import routesLaboratorios from '../routes/laboratorios.routes';
+import routesAnalisis from '../routes/analisis.routes';
 import connection from '../db/connection';
 import cors from 'cors';
 
@@ -30,6 +34,10 @@ class Server {
 
     routes(){
         this.app.use('/api/pacientes', routesPacientes);
+        this.app.use('/api/doctores', routesDoctores);
+        this.app.use('/api/consultas', routesConsultas);
+        this.app.use('/api/laboratorios', routesLaboratorios);
+        this.app.use('/api/analisis', routesAnalisis);
     }
 
     conectarDB(){
